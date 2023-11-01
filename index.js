@@ -1,6 +1,6 @@
 const server = require("./src/app");
 const { conn } = require("./src/DB_connection");
-const PORT = 5432;
+const { PORT } = process.env || 3001;
 
 // Sincronizar Sequelize con la base de datos
 conn
