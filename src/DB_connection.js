@@ -1,14 +1,11 @@
 require("dotenv").config();
 const { Sequelize } = require("sequelize");
-const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
+const { DB_USER, DB_PASSWORD, DB_HOST, DB_DEPLOY } = process.env;
 const FavoriteModel = require("./models/Favorite");
 const UserModel = require("./models/User");
 
-const databaseUrl = process.env.DATABASE_URL;
 
-
-
-const sequelize = new Sequelize(databaseUrl, { logging: false, native: false });
+const sequelize = new Sequelize(DB_DEPLOY, { logging: false, native: false });
 
 
 // const sequelize = new Sequelize(
