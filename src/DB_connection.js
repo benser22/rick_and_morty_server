@@ -1,6 +1,6 @@
 require("dotenv").config();
 const { Sequelize } = require("sequelize");
-const { DB_USER, DB_PASSWORD, DB_HOST, DB_DEPLOY } = process.env;
+const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 const FavoriteModel = require("./models/Favorite");
 const UserModel = require("./models/User");
 
@@ -9,15 +9,13 @@ const sequelize = new Sequelize(
    { logging: false, native: false }
 );
 
-// const sequelize = new Sequelize(DB_DEPLOY, { logging: false, native: false });
-
 FavoriteModel(sequelize);
 UserModel(sequelize);
 
 const { User, Favorite } = sequelize.models;
 
-User.belongsToMany(Favorite, { through: "UserFavorite" });
-Favorite.belongsToMany(User, { through: "UserFavorite" });
+User.belongsToMany(Favorite, { through: "UserFavorite", timestamps: false });
+Favorite.belongsToMany(User, { through: "UserFavorite", timestamps: false });
 
 module.exports = {
   User,
